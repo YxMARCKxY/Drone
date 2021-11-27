@@ -27,12 +27,15 @@ float pid_p=0;
 float pid_i=0;
 float pid_d=0;
 /////////////////PID CONSTANTS/////////////////
-double kp=3.50;//3.55
+double kp=3.53;//3.55
 double ki=0.003;//0.003
-double kd=2.05;//2.05
+double kd=2.5;//2.05
+
+bool activador=1;
+
 ///////////////////////////////////////////////
 
-double throttle=1300; //initial value of throttle to the motors
+double throttle=1285; //initial value of throttle to the motors
 float desired_angle = 0; //This is the angle in which we whant the
                          //balance to stay steady
 
@@ -232,12 +235,16 @@ width for each pulse*/
 
 /*Serial.print(pwmRight);
 Serial.print(",");*/
+Serial.print("vel: ");
+Serial.print(pwmRight);
+Serial.print(",");
 Serial.print(0);
 Serial.print(",");
 Serial.print(PID);
 Serial.println();
 
 if(pwmRight>1000 && pwmRight <2000)
+  if(activador==1)
   left_prop.writeMicroseconds(pwmRight);
 //right_prop.writeMicroseconds(pwmRight);
 previous_error = error; //Remember to store the previous error.
