@@ -24,14 +24,14 @@ float pid_i=0;
 float pid_d=0;
 
 /////////////////PID CONSTANTS/////////////////
-double kp=3.53;//3.55
+double kp=3.55;//3.55
 double ki=0.003;//0.003
-double kd=2.5;//2.05
+double kd=2.05;//2.05
 ///////////////////////////////////////////////
 
 //////////////max/min velocities///////////////
-int min_vel = 1230;
-int max_vel = 1350;
+int min_vel = 1000;
+int max_vel = 2000;
 ///////////////////////////////////////////////
 
 double throttle=1285; //initial value of throttle to the motors
@@ -46,11 +46,13 @@ void setup() {
   Serial.begin(9600);
 
 ///////NUMBER OF PORT THAT CONTROL THE ENGINES /////////
-  right_prop_rear.attach(5); //attatch the behind right motor
-  left_prop_rear.attach(6);  //attatch the behind left motor
 
+  right_prop_forward.attach(12);
   left_prop_forward.attach(11);
-  right_prop_forward.attach(10);
+  
+  right_prop_rear.attach(10);
+  left_prop_rear.attach(13); 
+  
 ///////////////////////////////////////////////////////
   time = millis(); 
   
@@ -148,7 +150,7 @@ void loop() {
   Serial.println();
   ///////////////SENDING THE MICROSECONDS TO THE ENGINES////////////
   if(pwmRight>1000 && pwmRight <2000){
-      left_prop_rear.writeMicroseconds(pwmLeft);
+      //left_prop_rear.writeMicroseconds(pwmLeft);
       right_prop_rear.writeMicroseconds(pwmLeft);
 
       left_prop_forward.writeMicroseconds(pwmRight);
